@@ -1,0 +1,1 @@
+../assure_emulator_awake.sh
