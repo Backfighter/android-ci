@@ -2,7 +2,7 @@
 # GitLab CI Android Runner
 #
 #
-FROM debian:latest-slim
+FROM debian:stable-slim
 
 ENV ANDROID_BUILD_TOOLS "27.0.3"
 ENV ANDROID_SDK_TOOLS "26.0.2"
