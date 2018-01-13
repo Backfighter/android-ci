@@ -5,7 +5,6 @@
 FROM debian:stable-slim
 
 ENV ANDROID_BUILD_TOOLS "27.0.3"
-ENV ANDROID_SDK_TOOLS "26.0.2"
 ENV ANDROID_HOME "/android-sdk"
 ENV PATH=$PATH:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
@@ -17,7 +16,7 @@ RUN mkdir $ANDROID_HOME \
   && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install sdk tools
-RUN wget -O android-sdk.zip https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip \
+RUN wget -O android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip \
   && unzip -q android-sdk.zip -d $ANDROID_HOME \
   && rm android-sdk.zip
 
