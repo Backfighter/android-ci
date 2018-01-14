@@ -6,7 +6,7 @@ FROM openjdk:8-slim
 
 ENV ANDROID_BUILD_TOOLS "27.0.3"
 ENV ANDROID_HOME "/android-sdk"
-ENV PATH=$PATH:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+ENV PATH=$PATH:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
 # Prepare dependencies
 RUN mkdir $ANDROID_HOME \
