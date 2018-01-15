@@ -7,7 +7,7 @@ FROM openjdk:8-slim
 ENV ANDROID_BUILD_TOOLS "27.0.3"
 ENV API_LEVEL "25"
 ENV ANDROID_HOME "/android-sdk"
-ENV PATH=$PATH:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
+ENV PATH=$PATH:${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
 # Prepare dependencies
 RUN mkdir $ANDROID_HOME \
@@ -38,13 +38,12 @@ RUN update_sdk  'tools' 'platform-tools' "build-tools;${ANDROID_BUILD_TOOLS}"
 RUN update_sdk "platforms;android-${API_LEVEL}"
 
 # Update emulators
-RUN update_sdk "system-images;android-${API_LEVEL};google_apis;x86_64" \
-  "system-images;android-${API_LEVEL};google_apis;arm64-v8a"
+RUN update_sdk "system-images;android-${API_LEVEL};google_apis;x86"
 
-# Update extra
+# Update extra and support
 RUN update_sdk "extras;android;m2repository" "extras;google;m2repository" \
-  "extras;google;google_play_services"
-
-# Support
-RUN update_sdk "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
+  "extras;google;google_play_services" \
+  "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
   "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
+  
+RUN sdkmanager --update
