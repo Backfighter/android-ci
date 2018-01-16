@@ -5,7 +5,7 @@
 FROM openjdk:8-jdk
 
 ENV ANDROID_BUILD_TOOLS "25.0.1"
-ENV ANDROID_SDK_TOOLS "25.2.4"
+ENV ANDROID_SDK_TOOLS "3859397"
 ENV ANDROID_HOME "/android-sdk"
 ENV PATH=$PATH:${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
@@ -17,7 +17,7 @@ RUN mkdir $ANDROID_HOME \
   && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install sdk tools
-RUN wget -O android-sdk.zip https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip \
+RUN wget -O android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
   && unzip -q android-sdk.zip -d $ANDROID_HOME \
   && rm android-sdk.zip
 
