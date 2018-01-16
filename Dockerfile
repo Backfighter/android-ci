@@ -7,7 +7,7 @@ FROM openjdk:8-jdk
 ENV ANDROID_BUILD_TOOLS "25.0.1"
 ENV ANDROID_SDK_TOOLS "25.2.4"
 ENV ANDROID_HOME "/android-sdk"
-ENV PATH=$PATH:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+ENV PATH=$PATH:${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
 # Prepare dependencies
 RUN mkdir $ANDROID_HOME \
@@ -32,16 +32,14 @@ RUN chmod +x /usr/local/bin/update_sdk \
   && chmod +x /usr/local/bin/assure_emulator_awake.sh
 
 # Update platform and build tools
-RUN update_sdk platform-tools \
-  && update_sdk build-tools-${ANDROID_BUILD_TOOLS}
+RUN update_sdk "platform-tools" "build-tools-${ANDROID_BUILD_TOOLS}"
 
 # Update SDKs
-RUN update_sdk android-24 \
-  && update_sdk android-23
+RUN update_sdk "platforms;android-24" "platforms;android-23"
 
 # Update emulators
-RUN update_sdk sys-img-armeabi-v7a-google_apis-24 \
-  && update_sdk sys-img-armeabi-v7a-google_apis-23
+RUN update_sdk "system-images;android-24;google_apis;x86" \
+  "system-images;android-23;google_apis;x86"
 
 # Update extra
 RUN update_sdk extra-android-m2repository \

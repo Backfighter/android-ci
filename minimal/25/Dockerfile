@@ -12,7 +12,7 @@ ENV PATH=$PATH:${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/to
 # Prepare dependencies
 RUN mkdir $ANDROID_HOME \
   && apt-get update --yes \
-  && apt-get install --yes wget tar unzip lib32stdc++6 lib32z1 libqt5widgets5 libpulse0:i386 \
+  && apt-get install --yes wget tar unzip lib32stdc++6 lib32z1 libqt5widgets5 glibc \
   && apt-get clean \
   && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -32,13 +32,14 @@ RUN chmod +x /usr/local/bin/update_sdk \
   && chmod +x /usr/local/bin/assure_emulator_awake.sh
 
 # Update platform and build tools
-RUN update_sdk  'tools' 'platform-tools' "build-tools;${ANDROID_BUILD_TOOLS}"
+RUN update_sdk  'tools' 'platform-tools' "build-tools;${ANDROID_BUILD_TOOLS}" \
+  'emulator'
 
 # Update SDKs
 RUN update_sdk "platforms;android-${API_LEVEL}"
 
 # Update emulators
-RUN update_sdk "system-images;android-${API_LEVEL};google_apis;x86"
+RUN update_sdk "system-images;android-${API_LEVEL};google_apis;x86_64"
 
 # Update extra and support
 RUN update_sdk "extras;android;m2repository" "extras;google;m2repository" \
