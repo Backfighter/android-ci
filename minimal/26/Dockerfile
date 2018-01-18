@@ -22,7 +22,7 @@ RUN wget -nv -O android-sdk.zip https://dl.google.com/android/repository/sdk-too
   && rm android-sdk.zip
 
 # Add tools from travis
-ADD https://raw.githubusercontent.com/travis-ci/travis-cookbooks/ca800a93071a603745a724531c425a41493e70ff/community-cookbooks/android-sdk/files/default/android-wait-for-emulator /usr/local/bin/android-wait-for-emulator
+ADD wait_for_emulator_boot.sh /usr/local/bin/android-wait-for-emulator
 RUN chmod +x /usr/local/bin/android-wait-for-emulator
 
 # Add own tools
